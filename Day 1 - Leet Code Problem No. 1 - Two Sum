@@ -1,0 +1,12 @@
+class Solution(object):
+  def two_sum(self, nums, target):
+
+    for i in range(len(nums)): # to hold first number
+      for j in range(i + 1, len(nums)): # to hold second number
+        if nums[i] + nums[j] == target: # add both number and compare with target
+          return [i,j]
+
+nums = [2, 7, 5, 4, 11]
+target = 6
+solution = Solution()
+print(solution.two_sum(nums, target))
