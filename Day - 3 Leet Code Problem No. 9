@@ -1,0 +1,18 @@
+# Checking Palindrome without converting into String
+
+def isPalindrome(x: int):
+    # Negative numbers and numbers ending in 0 (except 0 itself) cannot be palindromes
+    if x < 0 or (x % 10 == 0 and x != 0):
+        return False
+        
+    reversed_num = 0
+    original = x
+    
+    while x > 0:
+        last_digit = x % 10          # Get the last digit
+        reversed_num = (reversed_num * 10) + last_digit  # Shift left and add digit
+        x = x // 10                 # Remove the last digit from x
+        
+    return original == reversed_num
+
+isPalindrome(121)
