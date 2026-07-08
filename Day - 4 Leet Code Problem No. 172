@@ -1,0 +1,9 @@
+# Factorial Trailing Zeroes 
+
+def trailingZeroes(n):
+    count = 0 # initiate with the value 0
+    while n >= 5: # check if the number is greater or less than to 5 
+        count += n // 5 # calculate multiples of 5 
+        n //= 5 # reduce the value of n
+    return count
+trailingZeroes(27)
