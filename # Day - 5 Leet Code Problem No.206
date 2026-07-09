@@ -1,0 +1,33 @@
+# Reversed Linked List
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+def traverse(head):
+    curr = head # initiates current term as head
+    while curr is not None: # iterate till last element
+        print(curr.data, end=" --> ") # printing elements
+        curr = curr.next # move to the next element
+    print("None")
+
+def rev(head):
+    curr = head
+    nxt = prev = None 
+    while curr != None: 
+        nxt = curr.next
+        curr.next = prev
+        prev = curr
+        curr = nxt
+    return prev
+
+a = Node(2)
+b = Node(7)
+c = Node(10)
+a.next = b
+b.next = c
+
+head = a # Initialize head here
+head = rev(head) # reverse the list
+print("Reversed list:")
+traverse(head)
