@@ -1,0 +1,25 @@
+# Finding Second Middle Element in a Linked List
+
+class Node:
+  def __init__(self,data):
+    self.data = data
+    self.next = None
+
+a = Node(2) # creating nodes
+b = Node(7)
+c = Node(11)
+d = Node(20)
+
+a.next = b # linking nodes together
+b.next = c
+c.next = d
+
+head = a # assign a as head 
+slow = head # start slow pointer from head
+fast = head # start fast pointer from head
+
+while fast and fast.next: # iterate till it reach None
+  slow = slow.next
+  fast = fast.next.next
+
+print(slow.data)
