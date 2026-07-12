@@ -1,0 +1,53 @@
+# Delete Node in a Binary Search Tree (BST)
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    def deleteNode(self, root: TreeNode, key: int):
+        if not root:
+            return None
+        # Step 1: Search for the node
+        if key < root.val:
+            root.left = self.deleteNode(root.left, key)
+        elif key > root.val:
+            root.right = self.deleteNode(root.right, key)
+        else:
+            # Step 2: Node found! Handle the 3 deletion cases:
+            # Case 1 & 2: No children or only 1 child
+            if not root.left:
+                return root.right
+            if not root.right:
+                return root.left
+            # Case 3: Two children
+            # Find the Inorder Successor (smallest in right subtree)
+            successor = root.right
+            while successor.left:
+                successor = successor.left          
+            # Replace root's value with successor's value
+            root.val = successor.val      
+            # Delete the successor node from the right subtree
+            root.right = self.deleteNode(root.right, successor.val)     
+        return root
+
+root = TreeNode(50)
+
+root.left = TreeNode(30)
+root.right = TreeNode(70)
+
+root.left.left = TreeNode(20)
+root.left.right = TreeNode(40)
+
+root.right.left = TreeNode(60)
+root.right.right = TreeNode(80)
+
+solution = Solution()
+updated_root = solution.deleteNode(root, 30)
+
+print("Root value:", updated_root.val)                # Expected: 50
+print("Left child value:", updated_root.left.val)      # Expected: 40 (Replaced 30!)
+print("Left-Left child value:", updated_root.left.left.val) # Expected: 20
+print("Left-Right child value:", updated_root.left.right)   # Expected: None (40 moved up)
+print("Right child value:", updated_root.right.val)    # Expected: 70
