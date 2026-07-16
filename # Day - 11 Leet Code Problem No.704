@@ -1,0 +1,20 @@
+# Binary Search
+def search(nums, target):
+    left = 0
+    right = len(nums) - 1
+    while left <= right:
+        # Calculates the middle index safely to prevent integer overflow
+        mid = left + (right - left) // 2 
+        if nums[mid] == target:
+           print(f"{target} is found at {mid + 1} position.")
+           return mid
+        elif nums[mid] < target:
+            left = mid + 1     # Discard the left half
+        else:
+            right = mid - 1    # Discard the right half
+    return -1
+
+list = [2, 4, 7, 10, 27, 50, 72, 89, 100]
+x = 27
+result = search(list,x)
+print(result)
