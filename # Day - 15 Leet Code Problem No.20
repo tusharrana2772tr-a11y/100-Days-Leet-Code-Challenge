@@ -1,0 +1,33 @@
+# Valid Parenthesis
+def isValid(s):
+    stack = []
+    # Map closing brackets to their corresponding opening brackets
+    mapping = {")": "(", "}": "{", "]": "["}    
+    for char in s:
+        if char in mapping:
+            # Pop the top element if stack isn't empty, else assign a dummy value
+            top_element = stack.pop() if stack else '#'
+            if mapping[char] != top_element:
+                return False
+        else:
+            # It's an opening bracket, push it onto the stack
+            stack.append(char)            
+    return not stack
+
+# --- Execution Block to Run the Code ---
+if __name__ == "__main__":
+    # Test cases to validate the implementation
+    test_cases = [
+        "()",       # Expected: True (Simple match)
+        "()[]{}",   # Expected: True (Multiple consecutive matches)
+        "(]",       # Expected: False (Mismatched brackets)
+        "([)]",     # Expected: False (Wrong closing order)
+        "{[]}",     # Expected: True (Nested brackets)
+        "[",        # Expected: False (Unclosed opening bracket)
+        "]"         # Expected: False (Closing bracket with no opening bracket)
+    ]    
+    print("Running Valid Parentheses Test Cases:\n" + "="*38)
+    for i, test_str in enumerate(test_cases, 1):
+        # Call the standalone function directly
+        result = isValid(test_str)
+        print(f"Test {i}: Input = '{test_str}' -> Result: {result}")
