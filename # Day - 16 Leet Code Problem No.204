@@ -1,0 +1,20 @@
+# Count Primes
+class Solution:
+    def countPrimes(self, n):
+        if n <= 2:
+            return 0     
+        # Initialize an array assuming all numbers up to n are prime
+        is_prime = [True] * n
+        is_prime[0] = is_prime[1] = False # 0 and 1 are not prime     
+        # Loop only up to the square root of n
+        for i in range(2, int(n**0.5) + 1):
+            if is_prime[i]:
+                # Mark all multiples of i starting from i*i as False
+                for j in range(i * i, n, i):
+                    is_prime[j] = False               
+        # The sum of True values gives the final count of prime numbers
+        return sum(is_prime)
+
+solution = Solution()
+result = solution.countPrimes(10)
+print(result)
