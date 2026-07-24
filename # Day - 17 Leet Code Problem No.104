@@ -1,0 +1,43 @@
+# Maximum Depth of a Binary Tree
+from collections import deque
+
+# 1. Define the Tree Node
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+# 2. Implement the Solution
+class Solution:
+    # Approach 1: Recursive DFS (Most common)
+    def maxDepthDFS(self, root):
+        if not root:
+            return 0
+        return 1 + max(self.maxDepthDFS(root.left), self.maxDepthDFS(root.right))
+    # Approach 2: Iterative BFS (Level Order)
+    def maxDepthBFS(self, root):
+        if not root:
+            return 0  
+        queue = deque([root])
+        depth = 0        
+        while queue:
+            depth += 1
+            # Process all nodes at the current level
+            for _ in range(len(queue)):
+                node = queue.popleft()
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)                    
+        return depth
+
+root = TreeNode(3)
+root.left = TreeNode(9)
+root.right = TreeNode(20)
+root.right.left = TreeNode(15)
+root.right.right = TreeNode(7)
+
+sol = Solution()
+print(f"DFS Depth Result: {sol.maxDepthDFS(root)}")  # Output: 3
+print(f"BFS Depth Result: {sol.maxDepthBFS(root)}")  # Output: 3
